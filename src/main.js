@@ -5,7 +5,7 @@ import { TodoList } from "./components/todo-list.js";
 import { state } from "./state.js";
 
 const App = () => {
-  const { $filteredTodos, onAdd, onRemove, onFilter } = state();
+  const { $todos, onAdd, onRemove, onFilter } = state();
 
   return render`
     <div class="container p-4" style="max-width: 500px;">
@@ -13,10 +13,9 @@ const App = () => {
       <div class="vstack gap-3">
         ${TodoFilter({ onFilter })}
         ${TodoInput({ onAdd })}
-        ${TodoList({ $todos: $filteredTodos, onRemove })}
+        ${TodoList({ $todos, onRemove })}
       </div>
-    </div>
-  `;
+    </div>`;
 };
 
-render(document.querySelector("#root")).html(App());
+document.querySelector("#root").replaceChildren(...App());

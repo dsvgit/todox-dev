@@ -33,7 +33,7 @@ export const state = () => {
 
   return {
     $filter,
-    $filteredTodos,
+    $todos: $filteredTodos,
     onAdd,
     onRemove,
     onFilter,

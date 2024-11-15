@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@preact/signals-core": "^1.8.0",
-    "bootstrap": "^5.3.3",
-    "jquery": "^4.0.0-beta.2"
+    "bootstrap": "^5.3.3"
   }
 }
