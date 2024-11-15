@@ -1,17 +1,17 @@
 import { render, signal, effect } from "../framework.js";
 
+const themes = {
+  system: { icon: "bi-brightness-alt-high" },
+  light: { icon: "bi-brightness-high" },
+  dark: { icon: "bi-moon" },
+};
+const order = Object.keys(themes);
+
+const storageKey = "theme";
+const saved = localStorage.getItem(storageKey);
+const $theme = signal(saved in themes ? saved : "system");
+
 export const ThemeSwitch = () => {
-  const themes = {
-    system: { icon: "bi-brightness-alt-high" },
-    light: { icon: "bi-brightness-high" },
-    dark: { icon: "bi-moon" },
-  };
-  const order = Object.keys(themes);
-
-  const storageKey = "theme";
-  const saved = localStorage.getItem(storageKey);
-  const $theme = signal(saved in themes ? saved : "system");
-
   const getTheme = (theme) => {
     return theme !== "system"
       ? theme

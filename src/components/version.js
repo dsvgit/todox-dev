@@ -3,7 +3,7 @@ import { effect, render, signal } from "../framework.js";
 export const Version = () => {
   const $version = signal("");
 
-  fetch("/version")
+  fetch("version")
     .then((res) => res.text())
     .then((text) => {
       $version.value = text;
