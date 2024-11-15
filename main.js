@@ -1,25 +1,33 @@
-import { render, signal, computed } from "./framework.js";
+import { render, signal, computed, effect } from "./framework.js";
 
 const TodoInput = ({ onAdd }) => {
-  let text = "";
+  const $text = signal("123");
 
   return render`
     <div class="row g-3 align-items-center">
       <div class="col-auto">
         ${render`<input type="text" class="form-control" />`
-          .on("change", (e) => {
-            text = e.target.value;
-          })
           .on("keydown", (e) => {
             if (e.key === "Enter") {
-              onAdd(e.target.value);
-              e.target.value = "";
+              e.preventDefault();
+              onAdd($text.value);
+              $text.value = "";
             }
+          })
+          .on("input", (e) => {
+            $text.value = e.target.value;
+          })
+          .withEffect((element) => {
+            element.prop("value", $text.value);
           })}
       </div>
       <div class="col-auto">
-        ${render`<button class="btn btn-primary">Add</button>`.on("click", () =>
-          onAdd(text),
+        ${render`<button class="btn btn-primary">Add</button>`.on(
+          "click",
+          () => {
+            onAdd($text.value);
+            $text.value = "";
+          },
         )}
       </div>
     </div>
@@ -96,23 +104,6 @@ const TodoList = ({ $todos, onRemove }) =>
     );
   });
 
-const App = () => {
-  const { $filteredTodos, onAdd, onRemove, onFilter } = state();
-
-  return render`
-    <div class="container p-4" style="max-width: 500px;">
-      <h1>Todos</h1>
-      <div class="vstack gap-3">
-        ${TodoFilter({ onFilter })}
-        ${TodoInput({ onAdd })}
-        ${TodoList({ $todos: $filteredTodos, onRemove })}
-      </div>
-    </div>
-  `;
-};
-
-render(document.querySelector("#root")).html(App());
-
 const state = () => {
   const $filter = signal("all");
   const $todos = signal([
@@ -144,3 +135,20 @@ const state = () => {
     onFilter,
   };
 };
+
+const App = () => {
+  const { $filteredTodos, onAdd, onRemove, onFilter } = state();
+
+  return render`
+    <div class="container p-4" style="max-width: 500px;">
+      <h1>Todos</h1>
+      <div class="vstack gap-3">
+        ${TodoFilter({ onFilter })}
+        ${TodoInput({ onAdd })}
+        ${TodoList({ $todos: $filteredTodos, onRemove })}
+      </div>
+    </div>
+  `;
+};
+
+render(document.querySelector("#root")).html(App());
