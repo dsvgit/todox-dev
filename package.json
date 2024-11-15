@@ -1,0 +1,21 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@preact/signals-core": "^1.8.0",
+    "bootstrap": "^5.3.3",
+    "jquery": "^4.0.0-beta.2"
+  }
+}
