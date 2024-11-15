@@ -10,7 +10,7 @@ export const Version = () => {
     });
 
   return render`
-    <span class="badge text-bg-secondary"></span>
+    <span class="blockquote-footer text-success" style="font-size: 12px;"></span>
     ${(element) => {
       effect(() => {
         element.innerText = "Released: " + $version.value;
