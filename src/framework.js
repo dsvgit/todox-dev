@@ -1,4 +1,8 @@
-import { effect, signal, computed } from "@preact/signals-core";
+import {
+  effect,
+  signal,
+  computed,
+} from "../vendor/@preact/signals-core/dist/signals-core.mjs";
 
 export const render = (strings, ...elements) => {
   const elementToId = new Map();
