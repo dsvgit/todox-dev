@@ -18,11 +18,8 @@ const TodoInput = ({ onAdd }) => {
           })}
       </div>
       <div class="col-auto">
-        ${render`<button class="btn btn-primary">Add</button>`.on(
-          "click",
-          () => {
-            onAdd(text);
-          },
+        ${render`<button class="btn btn-primary">Add</button>`.on("click", () =>
+          onAdd(text),
         )}
       </div>
     </div>
@@ -66,14 +63,12 @@ const TodoItem = ({ $todo, onRemove }) => {
         .on("change", handleCheck)
         .withEffect((element) => {
           const { checked } = $todo.value;
-
           element.prop("checked", checked);
         })}
 
       ${render`<label for="${id}" class="form-check-label" />`.withEffect(
         (element) => {
           const { text, checked } = $todo.value;
-
           element.text(text);
         },
       )}
@@ -102,41 +97,7 @@ const TodoList = ({ $todos, onRemove }) =>
   });
 
 const App = () => {
-  const $filter = signal("all");
-  const $todos = signal([
-    signal({
-      text: "Buy milk",
-      checked: false,
-    }),
-    signal({
-      text: "Buy chocolate",
-      checked: true,
-    }),
-  ]);
-  const $filteredTodos = computed(() => {
-    const filter = $filter.value;
-    if (filter === "active") {
-      return $todos.value.filter(($todo) => !$todo.value.checked);
-    }
-
-    if (filter === "completed") {
-      return $todos.value.filter(($todo) => $todo.value.checked);
-    }
-
-    return $todos.value;
-  });
-
-  const onAdd = (text) => {
-    $todos.value = [...$todos.value, signal({ text, checked: false })];
-  };
-
-  const onRemove = ($todo) => {
-    $todos.value = $todos.value.filter((x) => x !== $todo);
-  };
-
-  const onFilter = (filter) => {
-    $filter.value = filter;
-  };
+  const { $filteredTodos, onAdd, onRemove, onFilter } = state();
 
   return render`
     <div class="container p-4" style="max-width: 500px;">
@@ -146,9 +107,40 @@ const App = () => {
         ${TodoInput({ onAdd })}
         ${TodoList({ $todos: $filteredTodos, onRemove })}
       </div>
-      
     </div>
   `;
 };
 
 render(document.querySelector("#root")).html(App());
+
+const state = () => {
+  const $filter = signal("all");
+  const $todos = signal([
+    signal({ text: "Buy milk", checked: false }),
+    signal({ text: "Buy chocolate", checked: true }),
+  ]);
+  const $filteredTodos = computed(() => {
+    const todos = $todos.value;
+    const filter = $filter.value;
+
+    return filter === "active"
+      ? todos.filter(($todo) => !$todo.value.checked)
+      : filter === "completed"
+        ? todos.filter(($todo) => $todo.value.checked)
+        : todos;
+  });
+
+  const onAdd = (text) =>
+    ($todos.value = [...$todos.value, signal({ text, checked: false })]);
+  const onRemove = ($todo) =>
+    ($todos.value = $todos.value.filter((x) => x !== $todo));
+  const onFilter = (filter) => ($filter.value = filter);
+
+  return {
+    $filter,
+    $filteredTodos,
+    onAdd,
+    onRemove,
+    onFilter,
+  };
+};
