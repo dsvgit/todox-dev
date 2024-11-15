@@ -29,6 +29,28 @@ export const render = (strings, ...elements) => {
   return root;
 };
 
+export const For = ({ $list, component, children }) => {
+  const itemToElement = new WeakMap();
+
+  return component.withEffect((element) => {
+    const list = $list.value;
+
+    const elements = list.map((item) => {
+      const cached = itemToElement.get(item);
+
+      if (cached) {
+        return cached;
+      } else {
+        const newElement = children(item);
+        itemToElement.set(item, newElement);
+        return newElement;
+      }
+    });
+
+    element.get(0).replaceChildren(...elements.map((x) => x.get(0)));
+  });
+};
+
 $.fn.withEffect = function (fn) {
   effect(() => fn(this));
   return this;
