@@ -1,3 +1,7 @@
-input[type=checkbox]:checked ~ label {
-  /*text-decoration: line-through;*/
+button {
+  touch-action: manipulation;
+}
+
+.background-transition {
+  transition: background-color 120ms ease-in;
 }

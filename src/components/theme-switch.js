@@ -1,9 +1,9 @@
 import { render, signal, effect } from "../framework.js";
 
 const themes = {
-  system: { icon: "bi-brightness-alt-high" },
-  light: { icon: "bi-brightness-high" },
-  dark: { icon: "bi-moon" },
+  system: { icon: "bi-brightness-alt-high", color: "#ffffff" },
+  light: { icon: "bi-brightness-high", color: "#ffffff" },
+  dark: { icon: "bi-moon", color: "#212529" },
 };
 const order = Object.keys(themes);
 
@@ -22,6 +22,12 @@ export const ThemeSwitch = () => {
 
   const applyThemeToDocument = (theme) => {
     document.documentElement.setAttribute("data-bs-theme", getTheme(theme));
+    document
+      .querySelector('meta[name="theme-color"]')
+      .setAttribute("content", themes[getTheme(theme)].color);
+    setTimeout(() => {
+      document.body.classList.add("background-transition");
+    });
   };
 
   effect(() => {
