@@ -4,8 +4,25 @@ export const state = () => {
   const $filter = signal("all");
 
   const $todos = signal([
-    signal({ text: "Buy milk", checked: false }),
-    signal({ text: "Buy chocolate", checked: true }),
+    signal({ text: "🎒 Get your lunch box", checked: true }),
+    signal({ text: "👝 Get 3 ziploc bags", checked: true }),
+    signal({
+      text: "🍪 Put 2 cookies in a ziploc bag, then put it in your lunch box",
+      checked: false,
+    }),
+    signal({
+      text: "🥨 Put pretzels in a ziploc bag, then put it in your lunch box",
+      checked: false,
+    }),
+    signal({ text: "⬜ Put a napkin in your lunch box", checked: false }),
+    signal({
+      text: `🧈 Make a peanut butter sandwich, put it in your lunch box`,
+      checked: false,
+    }),
+    signal({
+      text: `🍼 Pour milk into your drink box, put it in your lunch box`,
+      checked: false,
+    }),
   ]);
 
   const $filteredTodos = computed(() => {

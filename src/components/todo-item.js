@@ -22,12 +22,12 @@ export const TodoItem = ({ $todo, onRemove }) => {
       `}
       
       ${render`
-        <label for="${id}" class="form-check-label" />
+        <label for="${id}" class="d-inline form-check-label" />
         ${(element) => {
           effect(() => {
             const { text, checked } = $todo.value;
             element.textContent = text;
-            element.style.textDecoration = checked ? "line-through" : "none";
+            element.style.opacity = checked ? 0.5 : 1;
           });
         }}
       `}

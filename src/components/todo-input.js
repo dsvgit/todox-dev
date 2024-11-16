@@ -15,9 +15,9 @@ export const TodoInput = ({ onAdd }) => {
 
   return render`
     <div class="row g-3 align-items-center">
-      <div class="col-auto">
+      <div class="col">
         ${render`
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" placeholder="Start typing here..." />
           ${(element) => {
             element.addEventListener("keydown", (e) => {
               e.key === "Enter" && handleAdd(e);
