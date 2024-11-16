@@ -25,7 +25,8 @@ const App = () => {
         ${TodoInput({ onAdd })}
         ${TodoList({ $todos, onRemove })}
       </div>
-    </div>`;
+    </div>
+  `;
 };
 
 document.querySelector("#root").replaceChildren(...App());

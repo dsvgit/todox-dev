@@ -1,12 +1,16 @@
-import { render, signal, effect } from "../framework.js";
+import { render, signal, effect, computed } from "../framework.js";
 
 export const TodoInput = ({ onAdd }) => {
   const $text = signal("");
+  const $isEmpty = computed(() => $text.value.trim() === "");
 
   const handleAdd = (e) => {
     e.preventDefault();
-    onAdd($text.value);
-    $text.value = "";
+
+    if (!$isEmpty.value) {
+      onAdd($text.value);
+      $text.value = "";
+    }
   };
 
   return render`
@@ -34,6 +38,10 @@ export const TodoInput = ({ onAdd }) => {
           <button class="btn btn-primary">Add</button>
           ${(element) => {
             element.addEventListener("click", handleAdd);
+
+            effect(() => {
+              element.disabled = $isEmpty.value;
+            });
           }}
         `}
       </div>
