@@ -1,6 +1,7 @@
 {
   "name": "Todox",
   "short_name": "Todox",
+  "description": "Simple todo lists app",
   "icons": [
     {
       "src": "favicon/web-app-manifest-192x192.png",
