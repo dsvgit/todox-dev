@@ -1,8 +1,10 @@
 import {
+  computed,
   effect,
   signal,
-  computed,
 } from "../vendor/@preact/signals-core/dist/signals-core.mjs";
+
+export { signal, effect, computed };
 
 export const render = (strings, ...elements) => {
   const elementToId = new Map();
@@ -74,4 +76,15 @@ export const For = ({ $list, component, children }) => {
   return component;
 };
 
-export { signal, effect, computed };
+export const persistentSignal = (name, initialValue, { onInit, onSet }) => {
+  const localState = JSON.parse(localStorage.getItem(name));
+  const state = localState || initialValue;
+  const $signal = signal(onInit ? onInit(state) : state);
+
+  effect(() => {
+    const result = onSet ? onSet($signal.value) : $signal.value;
+    localStorage.setItem(name, JSON.stringify(result));
+  });
+
+  return $signal;
+};

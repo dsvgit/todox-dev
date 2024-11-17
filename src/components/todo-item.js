@@ -8,7 +8,7 @@ export const TodoItem = ({ $todo, onRemove }) => {
   };
 
   return render`
-    <li class="list-group-item list-group-item-action">
+    <li class="list-group-item list-group-item-action hstack gap-3 pe-1 align-items-start">
       ${render`
         <input id="${id}" type="checkbox" class="form-check-input" />
         ${(element) => {
@@ -22,7 +22,7 @@ export const TodoItem = ({ $todo, onRemove }) => {
       `}
       
       ${render`
-        <label for="${id}" class="d-inline form-check-label" />
+        <label for="${id}" class="d-inline form-check-label flex-fill" />
         ${(element) => {
           effect(() => {
             const { text, checked } = $todo.value;
@@ -34,8 +34,8 @@ export const TodoItem = ({ $todo, onRemove }) => {
       
       ${render`
         <button
-          class="btn btn-sm float-end"
-          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+          class="btn btn-sm"
+          style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .6rem;"
         >
          ❌
         </button>
