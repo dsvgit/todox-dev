@@ -5,7 +5,7 @@
   "scripts": {
     "start": "http-server -c-1 -p 3000",
     "postinstall": "cp .hooks/pre-commit .git/hooks",
-    "format": "prettier '' --write",
+    "format": "prettier . --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
