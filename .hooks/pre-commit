@@ -2,3 +2,6 @@
 
 date > version
 git add version
+
+npm run format
+git add

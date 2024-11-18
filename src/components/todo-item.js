@@ -1,7 +1,7 @@
 import { effect, render } from "../framework.js";
 
 export const TodoItem = ({ $todo, onRemove }) => {
-  const id = Math.random().toString(16).slice(2);
+  const id = "id" + Math.random().toString(16).slice(2);
   const handleCheck = (e) => {
     e.preventDefault();
     $todo.value = { ...$todo.value, checked: e.target.checked };
