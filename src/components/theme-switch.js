@@ -1,4 +1,4 @@
-import { render, signal, effect } from "../framework.js";
+import { render, effect, persistentSignal } from "../framework.js";
 
 const themes = {
   system: { icon: "bi-brightness-alt-high", color: "#ffffff" },
@@ -7,17 +7,15 @@ const themes = {
 };
 const order = Object.keys(themes);
 
-const storageKey = "theme";
-const saved = localStorage.getItem(storageKey);
-const $theme = signal(saved in themes ? saved : "system");
+const $theme = persistentSignal("theme", "system", {
+  onInit: (x) => (x in themes ? x : "system"),
+});
+
+const query = window.matchMedia("(prefers-color-scheme: dark)");
 
 export const ThemeSwitch = () => {
   const getTheme = (theme) => {
-    return theme !== "system"
-      ? theme
-      : window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+    return theme !== "system" ? theme : query.matches ? "dark" : "light";
   };
 
   const applyThemeToDocument = (theme) => {
@@ -31,13 +29,10 @@ export const ThemeSwitch = () => {
   };
 
   effect(() => {
-    localStorage.setItem(storageKey, $theme.value);
     applyThemeToDocument($theme.value);
   });
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => applyThemeToDocument($theme.value));
+  query.addEventListener("change", (e) => applyThemeToDocument($theme.value));
 
   return render`
     <button class="btn btn-outline-secondary btn-sm" style="min-width: 34px">
