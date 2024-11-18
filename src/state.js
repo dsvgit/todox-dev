@@ -1,7 +1,7 @@
 import { computed, persistentSignal, signal } from "./framework.js";
 
 export const state = () => {
-  const $filter = signal("all");
+  const $filter = persistentSignal("filter", "all");
 
   const $todos = persistentSignal("todos", defaultTodos, {
     onInit: (x) => x.map((x) => signal(x)),
