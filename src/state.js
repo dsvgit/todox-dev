@@ -20,7 +20,7 @@ export const state = () => {
   });
 
   const onAdd = (text) => {
-    $todos.value = [...$todos.value, signal({ text, checked: false })];
+    $todos.value = [signal({ text, checked: false }), ...$todos.value];
   };
 
   const onRemove = ($todo) => {
