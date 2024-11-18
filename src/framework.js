@@ -77,8 +77,14 @@ export const For = ({ $list, component, children }) => {
 };
 
 export const persistentSignal = (name, initialValue, { onInit, onSet }) => {
-  const localState = JSON.parse(localStorage.getItem(name));
-  const state = localState || initialValue;
+  let state;
+  try {
+    const localState = JSON.parse(localStorage.getItem(name));
+    state = localState || initialValue;
+  } catch (e) {
+    state = initialValue;
+  }
+
   const $signal = signal(onInit ? onInit(state) : state);
 
   effect(() => {
