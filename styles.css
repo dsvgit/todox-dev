@@ -5,3 +5,12 @@ button {
 .background-transition {
   transition: background-color 120ms ease-in;
 }
+
+.todox-item-editable {
+  outline: none;
+}
+
+.todox-list-group-item-action:hover {
+  color: var(--bs-list-group-action-hover-color);
+  background-color: var(--bs-list-group-action-hover-bg);
+}
