@@ -1,10 +1,12 @@
 {
   "name": "todox",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "http-server -c-1 -p 3000",
     "postinstall": "cp .hooks/pre-commit .git/hooks",
+    "start": "webpack serve --mode=development --open",
+    "build": "webpack --mode=production",
+    "server": "http-server -p 3000 -c-1",
     "format": "prettier . --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,12 +14,18 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "html-webpack-plugin": "^5.6.3",
     "http-server": "^14.1.1",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
     "@preact/signals-core": "^1.8.0",
     "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.3"
+    "bootstrap-icons": "^1.11.3",
+    "y-webrtc": "^10.3.0",
+    "yjs": "^13.6.20"
   }
 }

@@ -2,7 +2,7 @@ import {
   computed,
   effect,
   signal,
-} from "../vendor/@preact/signals-core/dist/signals-core.mjs";
+} from "@preact/signals-core";
 
 export { signal, effect, computed };
 

@@ -1,5 +1,10 @@
 #!/bin/sh
 
+export PATH=$PATH:/usr/bin:/usr/local/bin
+
+npm run build
+git add index.html dist/index.js
+
 date > version
 git add version
 

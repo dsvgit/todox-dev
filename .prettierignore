@@ -1,3 +1,5 @@
 vendor
 sandbox
 favicon
+dist
+/index.html
