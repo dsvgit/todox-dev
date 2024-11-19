@@ -14,7 +14,7 @@ const App = () => {
       <div class="vstack gap-3">
         <header class="vstack">
           <div class="hstack justify-content-between">
-            <h1 class="mb-0">📋 Todox 123</h1>
+            <h1 class="mb-0">📋 Todox</h1>
             ${ThemeSwitch()}
           </div>
           <div>
@@ -30,4 +30,3 @@ const App = () => {
 };
 
 document.querySelector("#root").replaceChildren(...App());
-

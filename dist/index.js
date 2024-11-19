@@ -9,7 +9,7 @@
       <div class="vstack gap-3">
         <header class="vstack">
           <div class="hstack justify-content-between">
-            <h1 class="mb-0">📋 Todox 123</h1>
+            <h1 class="mb-0">📋 Todox</h1>
             ${(()=>{const t=t=>"system"!==t?t:A.matches?"dark":"light",e=e=>{document.documentElement.setAttribute("data-bs-theme",t(e)),document.querySelector('meta[name="theme-color"]').setAttribute("content",w[t(e)].color),setTimeout((()=>{document.body.classList.add("background-transition")}))};return g((()=>{e(L.value)})),A.addEventListener("change",(t=>e(L.value))),x`
     <button class="btn btn-outline-secondary btn-sm" style="min-width: 34px">
       ${x`
