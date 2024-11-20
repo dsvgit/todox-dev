@@ -1,8 +1,4 @@
-import {
-  computed,
-  effect,
-  signal,
-} from "@preact/signals-core";
+import { computed, effect, signal } from "@preact/signals-core";
 
 export { signal, effect, computed };
 
