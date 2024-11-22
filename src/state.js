@@ -23,14 +23,15 @@ export const state = () => {
       const yTodoArray = defaultTodos.map((todo) => makeYMap(todo));
       yTodos.insert(0, yTodoArray);
     }
+
+    $todos.value = yTodos.toArray();
+    yTodos.observe(() => {
+      $todos.value = yTodos.toArray();
+    });
   });
 
   const $filter = persistentSignal("filter", "all");
   const $todos = signal([]);
-
-  yTodos.observe(() => {
-    $todos.value = yTodos.toArray();
-  });
 
   const $filteredTodos = computed(() => {
     const filter = $filter.value;
