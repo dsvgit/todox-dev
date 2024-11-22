@@ -51,7 +51,7 @@ export const For = ({ $list, component, children }) => {
   component = component[0];
   const itemToElement = new WeakMap();
 
-  effect(() => {
+  const update = () => {
     const list = $list.value;
 
     const elements = list.map((item) => {
@@ -67,7 +67,9 @@ export const For = ({ $list, component, children }) => {
     });
 
     component.replaceChildren(...elements);
-  });
+  };
+
+  effect(update);
 
   return component;
 };
@@ -75,7 +77,7 @@ export const For = ({ $list, component, children }) => {
 export const persistentSignal = (
   name,
   initialValue,
-  { onInit, onSet } = {},
+  { onInit, onSet } = {}
 ) => {
   let state;
   try {
