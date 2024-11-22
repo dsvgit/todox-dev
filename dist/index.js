@@ -11,7 +11,7 @@
         <header class="vstack">
           <div class="hstack justify-content-between">
             <h1 class="mb-0">📋 Todox</h1>
-            ${(()=>{const t=t=>"system"!==t?t:_s.matches?"dark":"light",e=e=>{document.documentElement.setAttribute("data-bs-theme",t(e)),document.querySelector('meta[name="theme-color"]').setAttribute("content",bs[t(e)].color),setTimeout((()=>{document.body.classList.add("background-transition")}))};return _((()=>{e(ws.value)})),_s.addEventListener("change",(t=>e(ws.value))),v`
+            ${(()=>{const t=t=>"system"!==t?t:_s.matches?"dark":"light",e=e=>{document.documentElement.setAttribute("data-bs-theme",t(e)),document.querySelector('meta[name="theme-color"]').setAttribute("content",bs[t(e)].color),setTimeout((()=>{document.body.classList.add("todox-background-transition")}))};return _((()=>{e(ws.value)})),_s.addEventListener("change",(t=>e(ws.value))),v`
     <button class="btn btn-outline-secondary btn-sm" style="min-width: 34px">
       ${v`
         <i></i>

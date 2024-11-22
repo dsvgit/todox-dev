@@ -2,7 +2,7 @@ button {
   touch-action: manipulation;
 }
 
-.background-transition {
+.todox-background-transition {
   transition: background-color 120ms ease-in;
 }
 

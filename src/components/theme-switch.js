@@ -24,7 +24,7 @@ export const ThemeSwitch = () => {
       .querySelector('meta[name="theme-color"]')
       .setAttribute("content", themes[getTheme(theme)].color);
     setTimeout(() => {
-      document.body.classList.add("background-transition");
+      document.body.classList.add("todox-background-transition");
     });
   };
 
